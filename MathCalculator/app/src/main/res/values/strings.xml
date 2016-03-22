@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">MathCalculator</string>
+    <string name="action_settings">Settings</string>
+    <string name="btnZero">0</string>
+    <string name="btnOne">1</string>
+    <string name="btnTwo">2</string>
+    <string name="btnThree">3</string>
+    <string name="btnFour">4</string>
+    <string name="btnFive">5</string>
+    <string name="btnSix">6</string>
+    <string name="btnSeven">7</string>
+    <string name="btnEight">8</string>
+    <string name="btnNine">9</string>
+    <string name="btnAdd">+</string>
+    <string name="btnSubtract">-</string>
+    <string name="btnEquals">=</string>
+    <string name="btnDivide">÷</string>
+    <string name="btnMultiply">×</string>
+    <string name="btnDecimal">.</string>
+    <string name="btnNegative">±</string>
+    <string name="btnClearEverything">CE</string>
+    <string name="btnClear">C</string>
+    <string name="btnDelete">Del</string>
+    <string name="tvResult"> </string>
+</resources>
