@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Assignment2_QuizApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="begin">Begin Quiz</string>
+    <string name="title_activity_game">gameActivity</string>
+    <string name="restart">Start Over</string>
+    <string name="quizComplete">, you completed the quiz with a score of\u0020</string>
+    <string name="displayName">myQuiz</string>
+</resources>
