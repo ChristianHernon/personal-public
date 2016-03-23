@@ -1,0 +1,44 @@
+body {
+    background-color: #000;
+}
+
+.playing-area {
+    background-color: #333;
+    width: 80%;
+    height: 600px;
+    margin-left: 2%;
+    display: inline-block;
+}
+
+.score {
+    width: 15%;
+    height: 600px;
+    color: #ffffff;
+    text-align: center;
+    border: solid white 1px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 3em;
+    margin-left: 10px;
+}
+
+.input {
+    width: 80%;
+    height: 10%;
+    border: dotted green 1px;
+    margin-left: 2%;
+}
+
+.word {
+    color: #fff;
+    font-size: 2em;
+    font-family: sans-serif;
+    position: relative;
+}
+
+#data {
+    font-size: 2em;
+    background-color: black;
+    color: yellow;
+    width: 70%;
+}
