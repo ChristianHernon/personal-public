@@ -1,14 +1,28 @@
 import React from 'react';
 
-export class TodoItem extends React.Component {
-    render() {
-        let itemsHTML = this.props.items.map(item => <li className="todo-item" key={item.key}>{item.name}</li>);
+export default class TodoItem extends React.Component {
+    constructor(props) {
+        super(props)
+
+        // bindings
+        this.buildRow = this.buildRow.bind(this);
+    }
+
+    buildRow(item) {
         return (
-            <ul className="todo-list">
-                {itemsHTML}
-            </ul>
+            <li className={item.done ? 'todo-item done' : 'todo-item'}
+                onClick={() => this.props.onClick(item.key)}
+                key={item.key}>
+                {item.name}
+            </li>
+        );
+    }
+
+    render() {
+        return (
+            <ol className='todo-list'>
+                {this.props.items.map(this.buildRow)}
+            </ol>
         );
     }
 };
-
-export default TodoItem;
