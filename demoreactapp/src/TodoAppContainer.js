@@ -1,50 +1,62 @@
 import React from 'react';
-import TodoItem from './todo-item';
+import TodoList from './TodoList';
+import TodoForm from './TodoForm';
+import { GenerateID } from './generateId';
 
-export default class TodoList extends React.Component {
+export default class TodoListContainer extends React.Component {
     constructor(props) {
         super(props);
 
         // init state
         this.state = {
+            newItem: '',
             items: [{
                 name: 'Build Todo List App',
                 done: true,
-                key: Date.now(),
+                key: GenerateID.next().value
             }]
         };
 
         // bindings
         this.addItem = this.addItem.bind(this);
         this.completeItem = this.completeItem.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    addItem(ev) {
+    addItem() {
         // exit early if there is no item
-        if (!!!this._inputElement.value.trim()) return;
+        if (!!!this.state.newItem.trim()) return;
 
         // build new item to add
         const itemToAdd = {
-            name: this._inputElement.value,
+            name: this.state.newItem,
             done: false,
-            key: Date.now(),
+            key: GenerateID.next().value
         };
 
         // update state with new item
-        this.setState(prevState => {
-            return { items: prevState.items.concat(itemToAdd) }
-        });
+        this.setState(prevState => ({
+            ...prevState,
+            newItem: '',
+            items: [itemToAdd, ...prevState.items]
+        }));
+    }
 
-        // clear input so it's ready for the next item
-        this._inputElement.value = '';
+    handleChange({ target }) {
+        // capture text from input field
+        const text = target.value;
 
-        // prevent default form submission action
-        ev.preventDefault();
+        // update state value for "newItem"
+        this.setState(prevState => ({
+            ...prevState,
+            newItem: text
+        }));
     }
 
     completeItem(key) {
         // create new copy of state items
         const updatedItems = [...this.state.items];
+
         // get the index of the item to update
         const index = updatedItems.findIndex(v => v.key === key);
 
@@ -65,12 +77,12 @@ export default class TodoList extends React.Component {
     render() {
         return (
             <section className='todo-section'>
-                <form onSubmit={this.addItem} className='todo-form'>
-                    <input ref={el => this._inputElement = el} placeholder='Add Todo Item' />
-                    <button type='submit'>Add Item</button>
-                </form>
-                <p className='todo-counter'>{this.getTodoCount()} of {this.state.items.length} tasks complete!</p>
-                <TodoItem items={this.state.items} onClick={this.completeItem} />
+                <TodoForm
+                    newItem={this.state.newItem}
+                    handleChange={this.handleChange}
+                    addItem={this.addItem}
+                />
+                <TodoList items={this.state.items} onClick={this.completeItem} count={this.getTodoCount()} />
             </section>
         );
     }
