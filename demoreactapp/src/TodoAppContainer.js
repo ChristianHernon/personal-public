@@ -21,6 +21,31 @@ export default class TodoListContainer extends React.Component {
         this.addItem = this.addItem.bind(this);
         this.completeItem = this.completeItem.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.removeItem = this.removeItem.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+    }
+
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleKeyDown);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.handleKeyDown);
+    }
+
+    handleKeyDown(e) {
+        if (e.key === 'Enter') this.addItem();
+    }
+
+    handleChange({ target }) {
+        // capture text from input field
+        const text = target.value;
+
+        // update state value for "newItem"
+        this.setState(prevState => ({
+            ...prevState,
+            newItem: text
+        }));
     }
 
     addItem() {
@@ -42,17 +67,6 @@ export default class TodoListContainer extends React.Component {
         }));
     }
 
-    handleChange({ target }) {
-        // capture text from input field
-        const text = target.value;
-
-        // update state value for "newItem"
-        this.setState(prevState => ({
-            ...prevState,
-            newItem: text
-        }));
-    }
-
     completeItem(key) {
         // create new copy of state items
         const updatedItems = [...this.state.items];
@@ -69,6 +83,13 @@ export default class TodoListContainer extends React.Component {
         });
     }
 
+    removeItem(key) {
+        const filteredItems = this.state.items.filter(v => v.key !== key);
+        this.setState({
+            items: filteredItems
+        });
+    }
+
     getTodoCount() {
         // return the count of the items that are "done"
         return this.state.items.filter(v => v.done).length;
@@ -82,7 +103,12 @@ export default class TodoListContainer extends React.Component {
                     handleChange={this.handleChange}
                     addItem={this.addItem}
                 />
-                <TodoList items={this.state.items} onClick={this.completeItem} count={this.getTodoCount()} />
+                <TodoList
+                    items={this.state.items}
+                    onClick={this.completeItem}
+                    count={this.getTodoCount()}
+                    remove={this.removeItem}
+                />
             </section>
         );
     }
