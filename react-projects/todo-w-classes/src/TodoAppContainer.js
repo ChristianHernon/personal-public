@@ -84,7 +84,10 @@ export default class TodoListContainer extends React.Component {
     }
 
     removeItem(key) {
+        // create new copy of filtered state items
         const filteredItems = this.state.items.filter(v => v.key !== key);
+
+        // update the state
         this.setState({
             items: filteredItems
         });
