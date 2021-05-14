@@ -1,0 +1,44 @@
+.loading-animation {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.loading-animation>div {
+    --diameter: 1.5rem;
+    --delay: 250ms;
+    width: var(--diameter, .5rem);
+    height: var(--diameter, .5rem);
+    background: #fff;
+    border-radius: 50%;
+    animation: fade 1s ease 0s infinite alternate;
+}
+
+.loading-animation>div {
+    background: var(--loading-color, #fff);
+}
+
+.loading-component h2 {
+    color: var(--loading-color, #fff);
+}
+
+.loading-animation div:nth-child(2) {
+    animation-delay: calc(1 * var(--delay));
+}
+
+.loading-animation div:nth-child(3) {
+    animation-delay: calc(2 * var(--delay));
+}
+
+@keyframes fade {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: .2;
+        transform: scale(.5);
+    }
+}
